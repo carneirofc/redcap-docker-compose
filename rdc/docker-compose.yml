@@ -16,7 +16,9 @@ services:
       - db
     ports:
       - "${WEB_PORT}:80"
+      - "${WEB_PORT_HTTPS}:443"
     volumes:
+      - ${SSL_CERT_DIR}:/usr/local/apache2/conf/certs
       - ${WEB_OVERRIDES}:/etc/container-config-override
       - ${WEBROOT_DIR}:/var/www/html
       - ${CREDENTIALS_DIR}:/var/credentials

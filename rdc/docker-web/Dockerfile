@@ -6,13 +6,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq && \
     apt-get -yq --no-install-recommends install \
-    msmtp-mta \
     ca-certificates \
     git \
-    ssh \
-    wget \
     libpng-dev \
     libzip-dev \
+    msmtp-mta \
+    ssh \
+    wget \
     zip \
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install gd zip mysqli \
