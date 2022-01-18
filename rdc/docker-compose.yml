@@ -15,9 +15,18 @@ services:
     depends_on:
       - db
     ports:
-      - "${WEB_PORT}:80"
-      - "${WEB_PORT_HTTPS}:443"
+      - target: 80
+        published: "${WEB_PORT}"
+        protocol: tcp
+        mode: host
+
+      - target: 443
+        published: "${WEB_PORT_HTTPS}"
+        protocol: tcp
+        mode: host
+
     volumes:
+      - ./docker-web/container-config/apache2/php.ini-production:/usr/local/etc/php/php.ini
       - ${SSL_CERT_DIR}:/usr/local/apache2/conf/certs
       - ${WEB_OVERRIDES}:/etc/container-config-override
       - ${WEBROOT_DIR}:/var/www/html
@@ -42,7 +51,7 @@ services:
     restart: always
     volumes:
       - ${MYSQL_DIR}:/var/lib/mysql
-      - ${LOGS_DIR}:/var/log/mysql
+        #  - ${LOGS_DIR}:/var/log/mysql
       - ${MYSQL_OVERRIDES}:/etc/mysql/mysql.conf.d
       - ${MYSQL_SCRIPTS}:/docker-entrypoint-initdb.d/
     ports:
