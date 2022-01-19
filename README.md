@@ -70,18 +70,9 @@ effort so feedback is appreciated.  Please create issues here with any suggestio
 - 2018-08-04  Added support for auto-install from `redcapx.y.z.zip`
 - 2018-08-01  Major refactoring into docker-compose 3
 
-## License
 
-Copyright (c) 2016 Andrew Martin
-Licensed under the MIT license.
-
-## Contributing
-
-Please make pull requests to extend the functionality and documentation
-
-## setup
-
-```
+### Docker self-signed SSL certificate
+```command
 
 # Clone the repository
 cd ~/
@@ -134,5 +125,16 @@ mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE}
 
 ```
 
+
+## License
+
+Copyright (c) 2016 Andrew Martin
+Licensed under the MIT license.
+
+## Contributing
+
+Please make pull requests to extend the functionality and documentation
+
+## setup
 [docker-compose-logo]: rdc/documentation/docker-compose.png "Docker Compose"
 [redcap-logo]: rdc/documentation/redcap-logo-large.png "REDCap"
