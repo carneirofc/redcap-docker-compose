@@ -15,16 +15,7 @@ services:
     depends_on:
       - db
     ports:
-      - target: 80
-        published: "${WEB_PORT}"
-        protocol: tcp
-        mode: host
-
-      - target: 443
-        published: "${WEB_PORT_HTTPS}"
-        protocol: tcp
-        mode: host
-
+      - ${WEB_PORT_HTTPS}:443
     volumes:
       - ./docker-web/container-config/apache2/php.ini-production:/usr/local/etc/php/php.ini
       - ${SSL_CERT_DIR}:/usr/local/apache2/conf/certs
