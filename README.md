@@ -71,7 +71,7 @@ effort so feedback is appreciated.  Please create issues here with any suggestio
 - 2018-08-01  Major refactoring into docker-compose 3
 
 
-### Docker self-signed SSL certificate
+## Docker self-signed SSL certificate
 
 ```command
 
