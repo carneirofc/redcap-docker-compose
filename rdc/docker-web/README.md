@@ -6,8 +6,8 @@ openssl req \
     rsa:4096 \
     -nodes \
     -sha256 \
-    -keyout certs/key.pem \
+    -keyout certs/pem.key \
     -x509 \
     -days 358000 \
-    -out certs/cert.pem
+    -out certs/pem.crt
 ```
