@@ -81,50 +81,69 @@ Please make pull requests to extend the functionality and documentation
 
 ## setup
 
-```
+Fist we need to clone the repository:
+
+```command
 
 # Clone the repository
 cd ~/
 git clone https://github.com/carneirofc/redcap-docker-compose
 cd redcap-docker-compose
+```
 
+Fix the user permisson for apache:
 
+```command
 # Fix www/ uid and gid
 sudo chown -Rv 501:33 www/
+```
 
-# Generate the self-signed certs
+Generate the self-signed certs
+
+```command
 cd rdc/docker-web
 openssl req \
     -newkey \
     rsa:4096 \
     -nodes \
     -sha256 \
-    -keyout certs/key.pem \
+    -keyout certs/pem.key \
     -x509 \
     -days 358000 \
-    -out certs/cert.pem
+    -out certs/pem.crt
+```
 
-# build the image from scratch
-cd ..
+build the image from scratch
+
+```command
+cd rdc/
 docker-compose build --no-cache
+```
 
+Install redcap from the zip file. We are using sed and some environment variables but the user can edit `www/database.php` and set the values accordingly.
 
-# Install web front-end
-cd ..
-
+```command
 # when using SELF-SIGNED SSL CERTIFICATE the web front-end will not work when uploading files.
+
 unzip redcap12.0.11.zip
-cp -Rv redcap/*  ./www/
+cp -Rv redcap/\*  ./www/
 
-sed  -i "s|^\$hostname .*|\$hostname = '${MYSQL_HOST}';|"  wwwdatabase.php/
-sed  -i "s|^\$db .*|\$db = '${MYSQL_DATABASE}';|"  www/database.php
-sed  -i "s|^\$username .*|\$username = '${MYSQL_USER}';|"  www/database.php
-sed  -i "s|^\$password .*|\$password = '${MYSQL_PASSWORD}';|"  www/database.php
+sed  -i "s|^$hostname .*|$hostname = '${MYSQL_HOST}';|"  wwwdatabase.php/
+sed  -i "s|^$db .*|$db = '${MYSQL_DATABASE}';|"  www/database.php
+sed  -i "s|^$username .*|$username = '${MYSQL_USER}';|"  www/database.php
+sed  -i "s|^$password .*|$password = '${MYSQL_PASSWORD}';|"  www/database.php
 
-sed  -i "s|^\$salt .*|\$salt = '${REDCAP_SALT}';|"  www/database.php
+sed  -i "s|^$salt .\*|$salt = '${REDCAP_SALT}';|"  www/database.php
 
+```
+
+Once the files are installed and `database.php` configured, follow the next steps available at https://localhost/install.php.
+
+```command
 # open the REDCap install.php url, eg: https://localhost/install.php
+
 # copy the SQL script at step #4 (STEP 4: Create the REDCap database tables)
+
 # and mysql inside the docker container
 
 docker exec -it redcap_db bash
@@ -133,6 +152,3 @@ mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE}
 # and paste the contents !
 
 ```
-
-[docker-compose-logo]: rdc/documentation/docker-compose.png "Docker Compose"
-[redcap-logo]: rdc/documentation/redcap-logo-large.png "REDCap"
