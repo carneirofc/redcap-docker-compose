@@ -2,7 +2,15 @@
 
 Default directory to be mounted into the apache container `rdc/docker-web`.
 
-**REDCAP WILL ONLY WORK AS EXPECTED WITH VALID SIGNED CERTIFICATES**
+Generating the certificate:
+
+```bash
+openssl pkcs12 -in <domain>.pfx -out <domain>.crt -nokeys -clcerts
+
+openssl pkcs12 -in <domain>.pfx -out <domain>.key -nocerts -nodes
+```
+
+## self-signed **REDCAP WILL ONLY WORK AS EXPECTED WITH VALID SIGNED CERTIFICATES**
 
 For testing purposesn the self self-signed certificate can be generated using the following command:
 ```
