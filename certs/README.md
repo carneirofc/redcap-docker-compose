@@ -9,6 +9,7 @@ openssl pkcs12 -in <domain>.pfx -out <domain>.crt -nokeys -clcerts
 
 openssl pkcs12 -in <domain>.pfx -out <domain>.key -nocerts -nodes
 ```
+Remember to update the deploy environment variables so apache can find the certificate.
 
 ## self-signed **REDCAP WILL ONLY WORK AS EXPECTED WITH VALID SIGNED CERTIFICATES**
 
