@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  proxy:
+    image: haproxy:2.0.27-buster
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./ssl/haproxy.pem:/etc/ssl/haproxy.pem
+    network_mode: host
