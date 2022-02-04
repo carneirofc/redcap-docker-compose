@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 
 # IF THE WEBROOT IS EMPTY - THEN COPY OVER THE DEFAULT FILES
 #if [ -z "$(ls -A ${APACHE_DOCUMENT_ROOT})" ]; then

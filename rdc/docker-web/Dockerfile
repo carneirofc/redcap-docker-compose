@@ -11,7 +11,9 @@ RUN apt-get update -qq && \
     libpng-dev \
     libzip-dev \
     msmtp-mta \
+    procps \
     ssh \
+    vim \
     wget \
     zip \
     && docker-php-ext-configure zip --with-libzip \
