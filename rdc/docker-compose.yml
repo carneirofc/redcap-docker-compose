@@ -2,6 +2,7 @@ version: '3.7'
 services:
   proxy:
     # We use haproxy for ssl redirect
+    container_name: ${DOCKER_PREFIX}_proxy
     image: haproxy:2.0.27-buster
     volumes:
       - ../haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
